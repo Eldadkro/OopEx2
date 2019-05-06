@@ -56,14 +56,16 @@ public class Board {
 	
 	private int countVector(int i,int j,int deltaI,int deltaJ) {
 		Player p = board[i][j];
-		int sum=0;
-		for(int indexI=i;indexI<n && indexI>=0;indexI+=deltaI)
-			for(int indexJ=j;indexJ<m && indexJ>=0;indexJ+=deltaJ) {
-				if(board[indexI][indexJ] != p)
-					return sum;
-				sum++;
-			}
+		int sum = 0;
+		while (i < n && i >= 0 && j < m && j >= 0) {
+			if (board[i][j] != p)
+				return sum;
+			sum++;
+			i += deltaI;
+			j += deltaJ;
+		}
 		return sum;
+
 	}
 	
 	private int lineContaining(int i,int j,int deltaI,int deltaJ) {

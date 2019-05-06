@@ -35,6 +35,7 @@ public class Tasks {
 		 */
 
 		int[] arr = new int[num];
+		boolean[] flags = new boolean[num];
 		int index = 0;
 		int i;
 		boolean flag;
@@ -45,8 +46,9 @@ public class Tasks {
 				for (int j = 0; j < num; j++)
 					if (dependecies[i][j] == true)
 						flag = true;
-				if (!flag) { // if we have something to print
+				if (!flag && flags[i] != true) { // if we have something to print
 					arr[index++] = i;
+					flags[i] = true;
 					for (int j = 0; j < num; j++)
 						dependecies[j][i] = false;
 					break;

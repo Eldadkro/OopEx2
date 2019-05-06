@@ -10,8 +10,8 @@ public class ReversedWords {
 	
 	private static String reversed(String s) {
 		String ReS = "";
-		while(s != null) {
-			ReS = s.charAt(s.length()-1) + ReS;
+		while(s != null && !s.isEmpty() ) {
+			ReS = ReS + s.charAt(s.length()-1);
 			s = s.substring(0, s.length()-1);
 		}
 		return ReS;
@@ -22,7 +22,7 @@ public class ReversedWords {
 		Scanner s = new Scanner(System.in);
 		while(s.hasNext() != false ) {
 			String token = s.next();
-			if(token == "X")
+			if(token.equals("X"))
 				break;
 			counter += isInside(head, reversed(token));
 			head.add(token);

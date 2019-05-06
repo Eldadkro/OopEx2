@@ -6,18 +6,20 @@ public class Node {
 	 private int count;
 	 
 	 public int num(String s) {
-		 if(s == null) // if it's the end of the string or empty
+		 if(s.isEmpty()) // if it's the end of the string or empty
 			 return count;
-		 Node tmp = children[s.charAt(0) - 'a' + 1]; //the child
+		 Node tmp = children[s.charAt(0) - 'a' ]; //the child
 		 return tmp == null ? 0 : tmp.num(s.substring(1)); // coninue down the chain into the end
 	 }
 	 
 	 public void add(String s) {
-		 if(s == null) // if it's the end of the string or empty
+		 if(s.isEmpty()) { // if it's the end of the string or empty
 			 count ++;
-		 if(children[s.charAt(0) - 'a' + 1]== null)
-			 children[s.charAt(0) - 'a' + 1] = new Node();
-		 children[s.charAt(0) - 'a' + 1].add(s.substring(1));
+			 return;
+		 }
+		 if(children[s.charAt(0) - 'a' ] == null)
+			 children[s.charAt(0) - 'a'] = new Node();
+		 children[s.charAt(0) - 'a'].add(s.substring(1));
 	 	}
 	 
 	 
