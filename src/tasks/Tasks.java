@@ -3,9 +3,10 @@ package tasks;
 public class Tasks {
 
 	private int num;
-	private boolean[][] dependecies;
+	private boolean[][] dependecies; // 2d array of boolean for dependencies 
 
-	public Tasks(int num) {
+	// scanner
+	public Tasks(int num) { 
 		this.num = num;
 		dependecies = new boolean[num][num];
 	}
@@ -34,12 +35,13 @@ public class Tasks {
 		 * loop
 		 */
 
-		int[] arr = new int[num];
-		boolean[] flags = new boolean[num];
-		int index = 0;
-		int i;
-		boolean flag;
+		int[] arr = new int[num]; // the order of numbers
+		boolean[] flags = new boolean[num]; // array that holds if we 
+											//already added numbers to the order
+		int index = 0; // the index we use to monitor the last entry of the order
+		boolean flag; //used to represent if we found something to add to the order
 		// add the independent tasks
+		int i;
 		for (int k = 0; k < num; k++) {
 			for (i = 0; i < num; i++) {
 				flag = false;
@@ -47,14 +49,14 @@ public class Tasks {
 					if (dependecies[i][j] == true)
 						flag = true;
 				if (!flag && flags[i] != true) { // if we have something to print
-					arr[index++] = i;
+					arr[index++] = i; // add to the order
 					flags[i] = true;
-					for (int j = 0; j < num; j++)
+					for (int j = 0; j < num; j++) // remove the dependencies for i task
 						dependecies[j][i] = false;
 					break;
 				}
 			} 
-			if(num == i)
+			if(num == i) // if we have a loop and can't print 
 				return null;
 		}
 		return arr;
