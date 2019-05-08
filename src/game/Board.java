@@ -4,13 +4,15 @@ package game;
 public class Board {
 	protected Player[][] board;
 	protected int n, m;
-
+	
+	//constructor 
 	public Board(int n, int m) {
 		this.n = n;
 		this.m = m;
 		board = new Player[n][m];
 	}
 
+	// puts a player in the spot i,j if it's empty 
 	protected boolean set(int i, int j, Player p) {
 		if(isEmpty(i, j)) {
 			board[i][j] = p;
@@ -19,14 +21,17 @@ public class Board {
 		return false;
 	}
 
+	// returns true if the spot is empty false if it isn't 
 	public boolean isEmpty(int i, int j) {
 		return board[i][j] == null ? true : false;
 	}
 
+	//returns what is in spot i,j
 	public Player get(int i, int j) {
 		return board[i][j] == null ? null : board[i][j];
 	}
 	
+	//returns true if the board is full false if their is an open spot
 	public boolean isFull() {
 		for(int i=0;i<n;i++)
 			for(int j=0;j<m;j++)
@@ -47,6 +52,7 @@ public class Board {
 		return str.toString();
 	}
 
+	// returns the max in 1d array
 	private int max(int[] arr) {
 		int maximum = 1;
 		for(int val : arr)
@@ -54,6 +60,8 @@ public class Board {
 		return maximum;
 	}
 	
+	// returns how many times the object in spot i,j is repeated
+	// is succession on vector (deltaI,deltaJ)
 	private int countVector(int i,int j,int deltaI,int deltaJ) {
 		Player p = board[i][j];
 		int sum = 0;
@@ -68,10 +76,14 @@ public class Board {
 
 	}
 	
+	// returns how many times the object in spot i,j is repeated
+	// is succession on line (deltaI,deltaJ)
 	private int lineContaining(int i,int j,int deltaI,int deltaJ) {
 		return countVector(i, j, deltaI, deltaJ) + 
 				countVector(i, j, -deltaI, -deltaJ)-1;
 	}
+	
+	//return the maximum amount p is repeated on any of the lines
 	protected int maxLineContaining(int i ,int j) {
 		int []results = new int[4];
 		int index = 0;
