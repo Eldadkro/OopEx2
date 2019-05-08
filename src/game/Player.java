@@ -1,29 +1,28 @@
 package game;
 
-
 public class Player {
 
 	private String name;
 	private char mark;
-	
-	// constructor 
+
+	// constructor
 	public Player(String name, char mark) {
 		this.name = name;
 		this.mark = mark;
 	}
-	
-	//getter
+
+	// getter
 	public String getName() {
 		return name;
 	}
-	
-	//getter
+
+	// getter
 	public char getMark() {
 		return mark;
 	}
-	
+
 	@Override
 	public String toString() {
-		return name +"(" + mark + ")";
+		return name + "(" + mark + ")";
 	}
 }

@@ -3,10 +3,10 @@ package tasks;
 public class Tasks {
 
 	private int num;
-	private boolean[][] dependecies; // 2d array of boolean for dependencies 
+	private boolean[][] dependecies; // 2d array of boolean for dependencies
 
 	// scanner
-	public Tasks(int num) { 
+	public Tasks(int num) {
 		this.num = num;
 		dependecies = new boolean[num][num];
 	}
@@ -25,7 +25,8 @@ public class Tasks {
 		return true;
 
 	}
-	//need work
+
+	// need work
 	public int[] order() {
 		/**
 		 * complexity O(N^3) insights: 1) if we in iteration i we have nothing to add to
@@ -36,10 +37,10 @@ public class Tasks {
 		 */
 
 		int[] arr = new int[num]; // the order of numbers
-		boolean[] flags = new boolean[num]; // array that holds if we 
-											//already added numbers to the order
+		boolean[] flags = new boolean[num]; // array that holds if we
+											// already added numbers to the order
 		int index = 0; // the index we use to monitor the last entry of the order
-		boolean flag; //used to represent if we found something to add to the order
+		boolean flag; // used to represent if we found something to add to the order
 		// add the independent tasks
 		int i;
 		for (int k = 0; k < num; k++) {
@@ -55,8 +56,8 @@ public class Tasks {
 						dependecies[j][i] = false;
 					break;
 				}
-			} 
-			if(num == i) // if we have a loop and can't print 
+			}
+			if (num == i) // if we have a loop and can't print
 				return null;
 		}
 		return arr;

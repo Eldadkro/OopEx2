@@ -8,11 +8,9 @@ import java.util.zip.ZipOutputStream;
 
 public class MainTest {
 
-	public static void zipIt(String zipFileName)
-			throws IOException {
+	public static void zipIt(String zipFileName) throws IOException {
 		String sourceFile = "src";
-		FileOutputStream fos = new FileOutputStream(
-				zipFileName);
+		FileOutputStream fos = new FileOutputStream(zipFileName);
 		ZipOutputStream zipOut = new ZipOutputStream(fos);
 		File fileToZip = new File(sourceFile);
 
@@ -21,33 +19,25 @@ public class MainTest {
 		fos.close();
 	}
 
-	private static void zipFile(File fileToZip,
-			String fileName, ZipOutputStream zipOut)
-			throws IOException {
+	private static void zipFile(File fileToZip, String fileName, ZipOutputStream zipOut) throws IOException {
 		if (fileToZip.isHidden()) {
 			return;
 		}
 		if (fileToZip.isDirectory()) {
 			if (fileName.endsWith("/")) {
-				zipOut.putNextEntry(
-						new ZipEntry(fileName));
+				zipOut.putNextEntry(new ZipEntry(fileName));
 				zipOut.closeEntry();
 			} else {
-				zipOut.putNextEntry(
-						new ZipEntry(fileName + "/"));
+				zipOut.putNextEntry(new ZipEntry(fileName + "/"));
 				zipOut.closeEntry();
 			}
 			File[] children = fileToZip.listFiles();
 			for (File childFile : children) {
-				zipFile(childFile,
-						fileName + "/"
-								+ childFile.getName(),
-						zipOut);
+				zipFile(childFile, fileName + "/" + childFile.getName(), zipOut);
 			}
 			return;
 		}
-		FileInputStream fis = new FileInputStream(
-				fileToZip);
+		FileInputStream fis = new FileInputStream(fileToZip);
 		ZipEntry zipEntry = new ZipEntry(fileName);
 		zipOut.putNextEntry(zipEntry);
 		byte[] bytes = new byte[1024];
@@ -60,8 +50,7 @@ public class MainTest {
 
 	public static boolean allGood = true;
 
-	private static boolean check(boolean cond,
-			String message) {
+	private static boolean check(boolean cond, String message) {
 		if (!cond) {
 			System.err.println("Problem: " + message);
 			allGood = false;
@@ -76,22 +65,18 @@ public class MainTest {
 		ExDetails s1 = ExDetails.firstStudent();
 		ExDetails s2 = ExDetails.secondStudent();
 
-		System.out.println(
-				"Check your personal details are correct here:");
+		System.out.println("Check your personal details are correct here:");
 		System.out.println(s1);
 		System.out.println(s2);
-		String zipName = String.format("%s_%s.zip",
-				s1.getId(), s2.getId());
+		String zipName = String.format("%s_%s.zip", s1.getId(), s2.getId());
 		System.out.println("--------------------------------------");
 		try {
 			zipIt(zipName);
-			System.out.println(
-					"Your zip file was created automatically! "
-							+ "you can find it in the project directory");
+			System.out
+					.println("Your zip file was created automatically! " + "you can find it in the project directory");
 			System.out.println("its name is " + zipName);
 		} catch (IOException e) {
-			System.err.println(
-					"Problem creating zip file! " + e);
+			System.err.println("Problem creating zip file! " + e);
 		}
 	}
 
@@ -99,23 +84,18 @@ public class MainTest {
 // main
 
 	public static void main(String[] args) {
-		check(MainTest.class.getPackage() == null,
-				"MainTest is not in the default package!");
+		check(MainTest.class.getPackage() == null, "MainTest is not in the default package!");
 
 		tree.TreeTest.main(null);
 		tasks.TasksTest.main(null);
 		game.GameTest.main(null);
 
-		if (allGood && tree.TreeTest.allGood
-				&& tasks.TasksTest.allGood
-				&& game.GameTest.allGood) {
+		if (allGood && tree.TreeTest.allGood && tasks.TasksTest.allGood && game.GameTest.allGood) {
 			System.out.println("ALL BASIC TESTS PASSED");
-			System.out.println(
-					"--------------------------------------");
+			System.out.println("--------------------------------------");
 			testExDetails();
 		} else {
-			System.err.println(
-					"--------------------------------------");
+			System.err.println("--------------------------------------");
 			System.err.println("SEE PROBLEMS ABOVE");
 		}
 	}
